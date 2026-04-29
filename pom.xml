@@ -21,6 +21,9 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>common</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
@@ -33,6 +36,23 @@
 		<kafka-avro-serializer.version>8.0.0</kafka-avro-serializer.version>
 		<avro.version>1.12.0</avro.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.berkay</groupId>
+				<artifactId>common-application</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkay</groupId>
+				<artifactId>common-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
