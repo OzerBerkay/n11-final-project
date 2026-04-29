@@ -1,0 +1,55 @@
+package com.berkayozer.application.handler;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.ValidationException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
+
+@Slf4j
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(value = {Exception.class})
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorDTO handleException(Exception exception) {
+        log.error(exception.getMessage(), exception);
+        return ErrorDTO.builder()
+                .code(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                .message("Unexpected error!")
+                .build();
+    }
+    
+    @ExceptionHandler(value = {ValidationException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorDTO handleException(ValidationException validationException) { // These type of exceptions occurs when validation errors
+        ErrorDTO errorDTO;
+        if (validationException instanceof ConstraintViolationException) {
+            String violations = extractViolationsFromException((ConstraintViolationException) validationException);
+            log.error(violations, validationException);
+            errorDTO = ErrorDTO.builder()
+                    .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                    .message(violations)
+                    .build();
+        } else { // If exception is another validation exception
+            String exceptionMessage = validationException.getMessage();
+            log.error(exceptionMessage, validationException);
+            errorDTO = ErrorDTO.builder()
+                    .code(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                    .message(exceptionMessage)
+                    .build();
+        }
+        return errorDTO;
+    }
+
+    private String extractViolationsFromException(ConstraintViolationException validationException) {
+        return validationException.getConstraintViolations()
+                .stream()
+                .map(ConstraintViolation::getMessage)
+                .collect(Collectors.joining("--"));
+    }
+
+}
