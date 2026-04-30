@@ -23,6 +23,7 @@
 	</developers>
 	<modules>
 		<module>common</module>
+		<module>user-service</module>
 	</modules>
 	<scm>
 		<connection/>
@@ -40,14 +41,50 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>com.berkay</groupId>
+				<groupId>com.berkayozer</groupId>
 				<artifactId>common-application</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
-				<groupId>com.berkay</groupId>
+				<groupId>com.berkayozer</groupId>
 				<artifactId>common-domain</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>user-domain-core</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>user-application-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>user-dataaccess</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>user-application</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>user-container</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>user-messaging</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
