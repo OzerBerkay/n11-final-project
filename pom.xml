@@ -24,6 +24,7 @@
 	<modules>
 		<module>common</module>
 		<module>user-service</module>
+		<module>product-service</module>
 	</modules>
 	<scm>
 		<connection/>
@@ -45,7 +46,6 @@
 				<artifactId>common-application</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.berkayozer</groupId>
 				<artifactId>common-domain</artifactId>
@@ -55,7 +55,7 @@
 			<dependency>
 				<groupId>com.berkayozer</groupId>
 				<artifactId>user-domain-core</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
@@ -79,6 +79,36 @@
 			<dependency>
 				<groupId>com.berkayozer</groupId>
 				<artifactId>user-container</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-application-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-dataaccess</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-application</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-container</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
