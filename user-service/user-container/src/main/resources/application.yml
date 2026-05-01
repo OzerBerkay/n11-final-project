@@ -1,0 +1,40 @@
+server:
+  port: 8181
+
+spring:
+  application:
+    name: user-service
+
+  # POSTGRESQL (Schema per Service)
+  datasource:
+    # Tüm servislerin bağlanacağı ortak DB: n11_db. Kullanılacak şema: user_schema
+    url: jdbc:postgresql://localhost:5432/n11_db?currentSchema=user_schema
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      # Local'de tabloları otomatik oluştursun diye update diyoruz
+      ddl-auto: update
+    show-sql: true # Konsolda SQL'leri görmek hatayı bulmayı kolaylaştırır
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: user_schema
+        # Şema fiziksel olarak yoksa Hibernate'in otomatik açması için kritik ayar:
+        hbm2ddl.create_namespaces: true
+
+  # REDIS (Local)
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+# (JWT CONFIG)
+jwt:
+  # Güçlü bir Base64 Secret Key (JWT imzalamak için)
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  access-token-expiration-ms: 900000     # 15 Dakika (Milisaniye)
+  refresh-token-expiration-ms: 604800000 # 7 Gün (Milisaniye)
