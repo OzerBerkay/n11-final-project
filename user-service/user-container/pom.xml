@@ -11,4 +11,26 @@
 
     <artifactId>user-container</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.berkayozer</groupId>
+            <artifactId>user-application</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.berkayozer</groupId>
+            <artifactId>user-dataaccess</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.berkayozer</groupId>
+            <artifactId>user-domain-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.berkayozer</groupId>
+            <artifactId>user-application-service</artifactId>
+        </dependency>
+
+    </dependencies>
 </project>
