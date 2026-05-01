@@ -16,7 +16,6 @@
         <module>user-dataaccess</module>
         <module>user-application</module>
         <module>user-container</module>
-        <module>user-messaging</module>
     </modules>
 
 
