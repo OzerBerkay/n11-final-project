@@ -1,0 +1,46 @@
+package com.berkayozer.order.service.dataaccess.order.entity;
+
+import com.berkayozer.domain.valueobject.OrderStatus;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "orders")
+@Entity
+public class OrderEntity {
+
+    @Id
+    private UUID id;
+    private UUID userId;
+    private BigDecimal price;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
+
+    private String failureMessages; // List<String> yerine araya virgül koyarak saklayacağız
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItemEntity> items;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderEntity that = (OrderEntity) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}

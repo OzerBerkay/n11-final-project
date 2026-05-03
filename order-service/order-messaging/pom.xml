@@ -10,5 +10,23 @@
     </parent>
 
     <artifactId>order-messaging</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.berkayozer</groupId>
+            <artifactId>kafka-producer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.berkayozer</groupId>
+            <artifactId>kafka-consumer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.berkayozer</groupId>
+            <artifactId>kafka-model</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>com.berkayozer</groupId>
+            <artifactId>order-application-service</artifactId>
+        </dependency>
+    </dependencies>
 </project>
