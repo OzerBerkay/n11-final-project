@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.berkayozer</groupId>
-        <artifactId>product-domain</artifactId>
+        <artifactId>kafka</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>product-application-service</artifactId>
+    <artifactId>kafka-producer</artifactId>
 
     <dependencies>
         <dependency>
@@ -18,43 +18,24 @@
         </dependency>
         <dependency>
             <groupId>com.berkayozer</groupId>
-            <artifactId>saga</artifactId>
+            <artifactId>kafka-model</artifactId>
         </dependency>
         <dependency>
             <groupId>com.berkayozer</groupId>
-            <artifactId>product-domain-core</artifactId>
+            <artifactId>kafka-config-data</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.berkayozer</groupId>
             <artifactId>common-domain</artifactId>
         </dependency>
-
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-json</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <scope>test</scope>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <scope>test</scope>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
         </dependency>
     </dependencies>
+
 </project>
