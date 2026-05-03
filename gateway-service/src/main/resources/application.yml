@@ -1,0 +1,28 @@
+server:
+  port: ${GATEWAY_SERVICE_PORT:8080}
+
+logging:
+  level:
+    com.berkayozer: ${LOG_LEVEL:DEBUG}
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: ${USER_SERVICE_URI:http://localhost:8181}
+              predicates:
+                - Path=/api/v1/users/**
+
+            - id: product-service
+              uri: ${PRODUCT_SERVICE_URI:http://localhost:8184}
+              predicates:
+                - Path=/api/v1/products/**, /api/v1/categories/**
+
+# Ortam değişkeni verilmezse default olarak tanımlı key kullanılır
+jwt:
+  secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
