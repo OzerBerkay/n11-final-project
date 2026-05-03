@@ -1,10 +1,11 @@
-package com.berkayozer.user.service.handler;
+package com.berkayozer.user.service.handler.helper;
 
 import com.berkayozer.user.service.domain.entity.User;
 import com.berkayozer.user.service.domain.exception.UserDomainException;
 import com.berkayozer.user.service.domain.valueobject.AccountStatus;
 import com.berkayozer.user.service.dto.login.LoginCommand;
 import com.berkayozer.user.service.dto.login.LoginResponse;
+import com.berkayozer.user.service.handler.LoginCommandHandler;
 import com.berkayozer.user.service.ports.output.repository.IdentityProviderPort;
 import com.berkayozer.user.service.ports.output.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
