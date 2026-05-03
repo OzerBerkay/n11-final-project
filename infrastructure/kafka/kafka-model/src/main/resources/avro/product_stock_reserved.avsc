@@ -1,0 +1,10 @@
+{
+    "namespace": "com.berkayozer.kafka.order.avro.model",
+    "type": "record",
+    "name": "ProductStockReservedAvroModel",
+    "fields": [
+        {"name": "sagaId", "type": {"type": "string", "logicalType": "uuid"}},
+        {"name": "orderId", "type": {"type": "string", "logicalType": "uuid"}},
+        {"name": "productId", "type": {"type": "string", "logicalType": "uuid"}}
+    ]
+}

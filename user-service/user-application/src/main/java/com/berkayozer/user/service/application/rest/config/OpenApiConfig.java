@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "N11 TMO User Service API",
+                title = "N11 User Service API",
                 description = "User Management and Identity Provider Service for Take My Order Platform",
                 version = "1.0",
                 contact = @Contact(

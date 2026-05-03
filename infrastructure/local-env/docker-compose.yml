@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # Database (POSTGRESQL)
+  postgres:
+    image: postgres:15-alpine
+    container_name: n11-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: n11_db
+
+  # KAFKA
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.2.5
+    container_name: n11-zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.2.5
+    container_name: n11-kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "19092:19092"
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      # IDE'den (dışarıdan) bağlanmak için 19092, kendi içlerinde 9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,LISTENER_LOCAL://localhost:19092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,LISTENER_LOCAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.2.5
+    container_name: n11-schema-registry
+    depends_on:
+      - kafka
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "PLAINTEXT://kafka:9092"
+      SCHEMA_REGISTRY_LISTENERS: "http://0.0.0.0:8081"
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: n11-kafka-ui
+    depends_on:
+      - kafka
+      - schema-registry
+    ports:
+      - "8090:8080" # 8080 Gateway'de olduğu için 8090
+    environment:
+      KAFKA_CLUSTERS_0_NAME: n11-local-cluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081

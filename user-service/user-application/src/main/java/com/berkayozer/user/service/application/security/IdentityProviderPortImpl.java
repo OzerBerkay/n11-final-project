@@ -49,6 +49,7 @@ public class IdentityProviderPortImpl implements IdentityProviderPort {
     public String generateAccessToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", user.getRole().name());
+        claims.put("userId", user.getId().getValue().toString());
         return buildToken(claims, user.getEmail().getValue(), jwtExpirationMs);
     }
 

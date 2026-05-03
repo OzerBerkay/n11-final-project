@@ -1,5 +1,5 @@
 package com.berkayozer.domain.valueobject;
 
 public enum OrderStatus {
-    PENDING, COMPLETED, CANCELLED
+    CANCELLED, COMPLETED, PAID, PENDING, REJECTED, STOCK_RESERVED
 }

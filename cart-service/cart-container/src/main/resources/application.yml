@@ -1,0 +1,27 @@
+server:
+  port: ${CART_SERVICE_PORT:8185}
+
+logging:
+  level:
+    com.berkayozer: ${LOG_LEVEL:DEBUG}
+
+spring:
+  application:
+    name: cart-service
+  cloud:
+    compatibility-verifier:
+      enabled: false
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: ${REDIS_TIMEOUT:60000}
+
+product-service:
+  url: ${PRODUCT_SERVICE_URL:http://localhost:8184}
+
+jwt:
+  # Güçlü bir Base64 Secret Key (JWT imzalamak ve doğrulamak için)
+  secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}

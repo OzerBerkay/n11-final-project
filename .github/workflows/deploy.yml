@@ -1,0 +1,122 @@
+name: Build and Push Microservices
+
+on:
+  push:
+    branches: [ "prod" ]  # Sadece prod branch'e push gelince çalışır
+    paths-ignore:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'README.md'
+  workflow_dispatch:      # GitHub arayüzünden manuel tetiklemek için
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Kodları Çek
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Java 21 Kurulumu
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven' # Maven paketlerini önbelleğe al (Hızlandırır)
+
+      # 3. Maven ile Derle
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      # 4: QEMU Emülatörünü Kur (ARM build alabilmek için şart)
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      # 5: Docker Buildx Kur (Multi-Platform build motoru)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 6. Docker Hub'a Giriş Yap
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # 7. Gateway Service (Build & Push)
+      - name: Build & Push Gateway Service
+        uses: docker/build-push-action@v5
+        with:
+          context: ./gateway-service
+          file: ./gateway-service/Dockerfile
+          push: true
+          # Hem Intel hem ARM için build al:
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ secrets.DOCKER_USERNAME }}/gateway-service:v1
+          no-cache: true
+
+      # 8. Customer Service (Build & Push)
+      - name: Build & Push Customer Service
+        uses: docker/build-push-action@v5
+        with:
+          context: ./customer-service
+          file: ./customer-service/Dockerfile
+          push: true
+          # Hem Intel hem ARM için build al:
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ secrets.DOCKER_USERNAME }}/customer-service:v1
+          no-cache: true
+
+      # 9. Order Service (Build & Push)
+      - name: Build & Push Order Service
+        uses: docker/build-push-action@v5
+        with:
+          context: ./order-service
+          file: ./order-service/Dockerfile
+          push: true
+          # Hem Intel hem ARM için build al:
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ secrets.DOCKER_USERNAME }}/order-service:v1
+          no-cache: true
+
+      # 10. Payment Service (Build & Push)
+      - name: Build & Push Payment Service
+        uses: docker/build-push-action@v5
+        with:
+          context: ./payment-service
+          file: ./payment-service/Dockerfile
+          push: true
+          # Hem Intel hem ARM için build al:
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ secrets.DOCKER_USERNAME }}/payment-service:v1
+          no-cache: true
+
+      # 11. Restaurant Service (Build & Push)
+      - name: Build & Push Restaurant Service
+        uses: docker/build-push-action@v5
+        with:
+          context: ./restaurant-service
+          file: ./restaurant-service/Dockerfile
+          push: true
+          # Hem Intel hem ARM için build al:
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ secrets.DOCKER_USERNAME }}/restaurant-service:v1
+          no-cache: true
+
+      # 12. Build ve Push adımları bittikten Docker Hub'a imajlar yüklendikten sonra
+      - name: Deploy to Kubernetes Master
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22
+          script: |
+            # Master Server'a Bağlanıp Kubernetes'e "Podları yenile" diyoruz. 
+            # Hepsini yenilemek için:
+            sudo kubectl rollout restart deployment -n take-my-order
+    
+            # NOT: Eğer sadece spesifik bir servisi (örn: order-service) yenilemek istersen:
+            # sudo kubectl rollout restart deployment/order-service -n take-my-order

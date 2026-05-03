@@ -24,6 +24,11 @@
 	<modules>
 		<module>common</module>
 		<module>user-service</module>
+		<module>product-service</module>
+		<module>infrastructure</module>
+		<module>gateway-service</module>
+		<module>order-service</module>
+		<module>cart-service</module>
 	</modules>
 	<scm>
 		<connection/>
@@ -45,7 +50,6 @@
 				<artifactId>common-application</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.berkayozer</groupId>
 				<artifactId>common-domain</artifactId>
@@ -55,7 +59,7 @@
 			<dependency>
 				<groupId>com.berkayozer</groupId>
 				<artifactId>user-domain-core</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
@@ -79,6 +83,139 @@
 			<dependency>
 				<groupId>com.berkayozer</groupId>
 				<artifactId>user-container</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-application-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-dataaccess</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-messaging</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-applicaiton</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-container</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>order-domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>order-application-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>order-dataaccess</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>order-messaging</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>order-applicaiton</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>order-container</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>cart-application-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>cart-domain-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>cart-dataaccess</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>cart-applicaiton</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>cart-container</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>outbox</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>saga</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>kafka-producer</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>kafka-consumer</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>kafka-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>kafka-config-data</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
