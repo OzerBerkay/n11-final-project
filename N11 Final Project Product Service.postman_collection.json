@@ -1,0 +1,394 @@
+{
+  "info": {
+    "_postman_id": "f91cc841-bb0e-4b94-bf4d-cf565372cba3",
+    "name": "N11 Final Project Product Service",
+    "description": "Kategori ve Ürün yönetimi uçtan uca test senaryoları.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47181661",
+    "_collection_link": "https://go.postman.co/collection/47181661-f91cc841-bb0e-4b94-bf4d-cf565372cba3?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Admin Operations (Katalog Yönetimi)",
+      "item": [
+        {
+          "name": "1.1 Create Category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response time is acceptable\", function () {",
+                  "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+                  "});",
+                  "",
+                  "pm.test(\"Category ID successfully returned & saved\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('categoryId');",
+                  "    pm.collectionVariables.set(\"category_id\", jsonData.categoryId);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Bilgisayar\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.2 Update Category",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Elektronik & Bilgisayar\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/categories/{{category_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "{{category_id}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.3 Create Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Product ID successfully returned & saved\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('productId');",
+                  "    pm.collectionVariables.set(\"product_id\", jsonData.productId);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"MacBook Pro M2\",\n  \"description\": \"Apple M2 Pro Çipli 11 inç Laptop\",\n  \"price\": 10000.00,\n  \"initialStock\": 50,\n  \"categoryId\": \"{{category_id}}\",\n  \"brand\": \"Apple\",\n  \"model\": \"MacBook Pro 11\",\n  \"color\": \"Space Yellow\",\n  \"imageUrl\": \"https://example.com/macbook-m3.jpg\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/products",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "1.4 Update Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{admin_token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"MacBook Pro M3 Max\",\n  \"description\": \"Apple M3 Max Çipli Güncellenmiş Sürüm\",\n  \"price\": 89000.00,\n  \"stockQuantity\": 45,\n  \"categoryId\": \"{{category_id}}\",\n  \"brand\": \"Apple\",\n  \"model\": \"MacBook Pro 17\",\n  \"color\": \"Space Black\",\n  \"imageUrl\": \"https://example.com/macbook-m3-max.jpg\",\n  \"active\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/{{product_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "{{product_id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "2. Public Operations (Müşteri İşlemleri)",
+      "item": [
+        {
+          "name": "2.1 Get All Products (List & Filter)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response contains products array\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.products).to.be.an('array');",
+                  "});",
+                  "",
+                  "pm.test(\"Pagination variables exist\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('currentPage');",
+                  "    pm.expect(jsonData).to.have.property('totalPages');",
+                  "    pm.expect(jsonData).to.have.property('totalItems');",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/products?page=0&size=10&brand=Apple",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                },
+                {
+                  "key": "brand",
+                  "value": "Apple"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "2.2 Get Product By ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Validates fetched product data\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.productId).to.eql(pm.collectionVariables.get(\"product_id\"));",
+                  "    pm.expect(jsonData).to.have.property('name');",
+                  "    pm.expect(jsonData).to.have.property('price');",
+                  "    pm.expect(jsonData).to.have.property('stockQuantity');",
+                  "    pm.expect(jsonData.active).to.be.true;",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/{{product_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "{{product_id}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8184"
+    },
+    {
+      "key": "admin_token",
+      "value": "BURAYA_USER_SERVICE_DEN_ALACAGINIZ_TOKENI_YAPISTIRIN"
+    },
+    {
+      "key": "category_id",
+      "value": ""
+    },
+    {
+      "key": "product_id",
+      "value": ""
+    }
+  ]
+}
