@@ -25,6 +25,7 @@
 		<module>common</module>
 		<module>user-service</module>
 		<module>product-service</module>
+		<module>infrastructure</module>
 	</modules>
 	<scm>
 		<connection/>
@@ -102,13 +103,50 @@
 
 			<dependency>
 				<groupId>com.berkayozer</groupId>
-				<artifactId>product-application</artifactId>
+				<artifactId>product-messaging</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>product-applicaiton</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>com.berkayozer</groupId>
 				<artifactId>product-container</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>outbox</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>saga</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>kafka-producer</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>kafka-consumer</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>kafka-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.berkayozer</groupId>
+				<artifactId>kafka-config-data</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

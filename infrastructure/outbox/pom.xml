@@ -5,17 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.berkayozer</groupId>
-        <artifactId>n11-final-project</artifactId>
+        <artifactId>infrastructure</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>product-service</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>product-applicaiton</module>
-        <module>product-container</module>
-        <module>product-dataaccess</module>
-        <module>product-domain</module>
-        <module>product-messaging</module>
-    </modules>
+    <artifactId>outbox</artifactId>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
 </project>
