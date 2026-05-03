@@ -23,6 +23,11 @@ spring:
               predicates:
                 - Path=/api/v1/products/**, /api/v1/categories/**
 
+            - id: cart-service
+              uri: ${PRODUCT_SERVICE_URI:http://localhost:8185}
+              predicates:
+                - Path=/api/v1/carts/**
+
 # Ortam değişkeni verilmezse default olarak tanımlı key kullanılır
 jwt:
   secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
