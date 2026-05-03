@@ -1,0 +1,11 @@
+{
+    "namespace": "com.berkayozer.kafka.order.avro.model",
+    "type": "record",
+    "name": "OrderCancelledAvroModel",
+    "fields": [
+        {"name": "sagaId", "type": {"type": "string", "logicalType": "uuid"}},
+        {"name": "orderId", "type": {"type": "string", "logicalType": "uuid"}},
+        {"name": "productId", "type": {"type": "string", "logicalType": "uuid"}},
+        {"name": "quantity", "type": "int"}
+    ]
+}
